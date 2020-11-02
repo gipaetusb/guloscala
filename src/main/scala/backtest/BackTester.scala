@@ -3,11 +3,11 @@ package backtest
 import backtest.BackTestTrade
 
 class BackTester(
-                  val contract: String,
-                  val trigger: Int,
-                  val sl: Double,
-                  val tp: Double
-                ) {
+  val contract: String,
+  val trigger: Int,
+  val sl: Double,
+  val tp: Double
+) {
 
   // one-arg auxiliary constructor
   def this(contract: String) = {

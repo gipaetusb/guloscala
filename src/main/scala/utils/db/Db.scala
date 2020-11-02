@@ -24,12 +24,13 @@ object Db extends App {
 
   val db = Database.forConfig("postgres")
   println("Hello world! This is slick 4 postgres")
+
   Await.result(
     awaitable=db.run(bid_ask_ticks.result).map(_.foreach{
       case (time, bid, ask, bid_size, ask_size, bid_decrease, ask_increase, pk) =>
-        println(" " + time)
+        println(time + " " + bid + " " + ask + " " + bid_size + " " + ask_size + " " + bid_decrease + " " + ask_increase + " " + pk)
     }),
-    atMost=2 seconds
+    atMost=5 seconds
   )
 
   /*val filtered = for {
