@@ -2,7 +2,7 @@ name := "guloscala"
 
 version := "0.1"
 
-scalaVersion := "2.13.3"
+scalaVersion := "2.12.2"
 
 libraryDependencies ++= Seq (
   "joda-time" % "joda-time" % "2.10.8",
