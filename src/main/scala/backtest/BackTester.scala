@@ -1,6 +1,7 @@
 package backtest
 
 import backtest.BackTestTrade
+import utils.db.Db
 
 class BackTester(
   val contract: String,
@@ -21,6 +22,7 @@ class BackTester(
 
   def backtest {
     println("Run a backtest")
+
   }
 
 }
