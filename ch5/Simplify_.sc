@@ -24,7 +24,7 @@ def simplify(expr: Expr): Expr = {
     case BinOp(Literal(1), "*", right) => simplify(right)
 
     case BinOp(left, "*", Literal(0)) => Literal(0)
-    case BinOp(Literal(0), "*", right) => Literal(0) 
+    case BinOp(Literal(0), "*", right) => Literal(0)
 
     case BinOp(left, "+", right) => BinOp(simplify(left), "+", simplify(right))
     case BinOp(left, "-", right) => BinOp(simplify(left), "-", simplify(right))
