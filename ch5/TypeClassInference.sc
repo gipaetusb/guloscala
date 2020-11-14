@@ -1,40 +1,38 @@
-trait StrParser[T]{ 
-  def parse(s: String): T
+trait StrWriter[T]{ 
+  def write(t: T): String 
 }
-object StrParser{
-  implicit object ParseInt extends StrParser[Int] {
-    def parse(s: String) = s.toInt
+object StrWriter{
+  implicit object WriteInt extends StrWriter[Int] {
+    def write(t: Int) = t.toString
   }
-  implicit object ParseBool extends StrParser[Boolean] {
-    def parse(s: String) = s.toBoolean
+  implicit object WriteBool extends StrWriter[Boolean] {
+    def write(t: Boolean) = t.toString
   }
-  implicit object ParseDouble extends StrParser[Double] {
-    def parse(s: String) = s.toDouble
+  implicit object WriteDouble extends StrWriter[Double] {
+    def write(t: Double) = t.toString
   }
 
-  implicit def ParseSeq[T: StrParser] = {
-    new StrParser[Seq[T]] {
-      def parse(s: String): Seq[T] = {
-        s.split(",").toSeq.map(implicitly[StrParser[T]].parse)
+  implicit def WriteSeq[T: StrWriter] = {
+    new StrWriter[Seq[T]] {
+      def write(t: Seq[T]) = {
+        t.map(implicitly[StrWriter[T]].write).mkString("[", ",", "]")
       }
     }
   }
 
-  implicit def ParseTuple[T: StrParser, V: StrParser] =
-    new StrParser[(T, V)] {
-      def parse(s: String): (T, V) = {
-        val Array(left, right) = s.split("=")
-        (implicitly[StrParser[T]].parse(left), implicitly[StrParser[V]].parse(right))
+  implicit def ParseTuple[T: StrWriter, V: StrWriter] =
+    new StrWriter[(T, V)] {
+      def write(t: (T, V)) = {
+        val left: T = t._1
+        val right: V = t._2
+        "[" + implicitly[StrWriter[T]].write(left) + "," + implicitly[StrWriter[V]].write(right) + "]"
       }
     }
 
 }
 
-def parseFromString[T: StrParser](s: String): T = {
-  
-  implicitly[StrParser[T]].parse(s)
-}
+def writeToString[T: StrWriter](t: T): String = implicitly[StrWriter[T]].write(t)
 
-def parseFromConsole[T: StrParser](s: String) = {
-  implicitly[StrParser[T]].parse(scala.Console.in.readLine())
+def writeToConsole[T](t: T)(implicit writer: StrWriter[T]): Unit = {
+  scala.Console.out.println(writer.write(t))
 }
