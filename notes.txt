@@ -1,0 +1,11 @@
+import $ivy.`io.getquill::quill-jdbc:3.5.2`
+import $ivy.`org.postgresql:postgresql:42.2.8`
+import $ivy.`com.opentable.components:otj-pg-embedded:0.13.1`
+import $ivy.`com.lihaoyi::scalatags:0.9.1`
+import $ivy.`com.lihaoyi::cask:0.7.4`
+import $ivy.`joda-time:joda-time:2.10.8`
+import $ivy.`com.typesafe.slick::slick:3.3.2`
+import $ivy.`org.slf4j:slf4j-nop:1.6.4`
+import $ivy.`com.typesafe.slick::slick-hikaricp:3.3.2`
+import $ivy.`org.postgresql:postgresql:9.4-1206-jdbc42`
+
